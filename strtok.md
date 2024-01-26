@@ -18,6 +18,27 @@ char *strtok(char *restrict str, const char *restrict delim);
 char *strtok_r(char *restrict str, const char *restrict delim, char **restrict saveptr);
 ```
 
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "Splitting a string by spaces";
+    char *token;
+    char delim[] = " ";
+
+    // The first call to strtok with the string to be tokenized
+    token = strtok(str, delim);
+    
+    while (token != NULL) {
+        puts(token); 
+        token = strtok(NULL, delim); // Get the next token
+    }
+
+    return 0;
+}
+```
+
 ## DESCRIPTION
 
 The **strtok()** function breaks a string into a sequence of zero or more nonempty tokens. On the first call to **strtok()**, the string to be parsed should be specified in **str**. In each subsequent call that should parse the same string, **str** must be NULL.
