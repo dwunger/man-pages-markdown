@@ -55,6 +55,50 @@ char    *strtok_r(char *restrict, const char *restrict, char **restrict);
 size_t   strxfrm(char *restrict, const char *restrict, size_t);
 size_t   strxfrm_l(char *restrict, const char *restrict, size_t, locale_t);
 ```
+---
+Windows Specific:
+```c
+// Memory Operations
+void    *CopyMemory(VOID *destination, const VOID *source, SIZE_T length); // Linux Equivalent: memcpy
+void    *MoveMemory(VOID *destination, const VOID *source, SIZE_T length); // Linux Equivalent: memmove
+void    *FillMemory(VOID *destination, SIZE_T length, BYTE fill); // Linux Equivalent: memset with specific byte
+void    *ZeroMemory(VOID *destination, SIZE_T length); // Linux Equivalent: memset to zero
+
+// Secure versions of string functions (available in Visual C++ and later)
+errno_t  memcpy_s(void *dest, rsize_t destSize, const void *src, rsize_t count); // Enhanced Linux Equivalent: memcpy
+errno_t  memmove_s(void *dest, rsize_t destSize, const void *src, rsize_t count); // Enhanced Linux Equivalent: memmove
+errno_t  memset_s(void *dest, rsize_t destSize, int ch, rsize_t count); // Enhanced Linux Equivalent: memset
+
+// String Manipulation
+errno_t  strcpy_s(char *dest, rsize_t destSize, const char *src); // Linux Equivalent: strcpy
+errno_t  strncpy_s(char *dest, rsize_t destSize, const char *src, rsize_t count); // Linux Equivalent: strncpy
+errno_t  strcat_s(char *dest, rsize_t destSize, const char *src); // Linux Equivalent: strcat
+errno_t  strncat_s(char *dest, rsize_t destSize, const char *src, rsize_t count); // Linux Equivalent: strncat
+
+// String Comparison
+int      lstrcmp(LPCSTR lpString1, LPCSTR lpString2); // Linux Equivalent: strcmp
+int      lstrcmpi(LPCSTR lpString1, LPCSTR lpString2); // Linux Equivalent: strcasecmp
+int      CompareString( // More granular control compared to Linux
+  LCID Locale,
+  DWORD dwCmpFlags,
+  PCNZCH lpString1,
+  int cchCount1,
+  PCNZCH lpString2,
+  int cchCount2
+); // Linux Equivalent: strcoll
+
+// String Search
+LPSTR    StrChr(LPCSTR lpStart, CHAR ch); // Linux Equivalent: strchr
+LPSTR    StrRChr(LPCSTR lpStart, LPCSTR lpEnd, CHAR ch); // Linux Equivalent: strrchr
+LPSTR    StrStr(LPCSTR lpFirst, LPCSTR lpSrch); // Linux Equivalent: strstr
+
+// String Length
+int      lstrlen(LPCSTR lpString); // Linux Equivalent: strlen
+
+// Secure Zero Memory
+void    SecureZeroMemory(VOID *ptr, SIZE_T cnt); // Linux Equivalent: Explicitly setting memory to zero, no direct equivalent
+```
+
 Inclusion of the `<string.h>` header may also make visible all symbols from `<stddef.h>`.
 
 ### The following sections are informative.
