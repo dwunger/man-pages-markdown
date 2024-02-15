@@ -93,9 +93,7 @@ Inclusion of the `<string.h>` header may also make visible all symbols from `<st
 ## COPYRIGHT
 Portions of this text are reprinted and reproduced in electronic form from IEEE Std 1003.1-2017, Standard for Information Technology -- Portable Operating System Interface (POSIX), The Open Group Base Specifications Issue 7, 2018 Edition, Copyright (C) 2018 by the Institute of Electrical and Electronics Engineers, Inc and The Open Group. In the event of any discrepancy between this version and the original IEEE and The Open Group Standard, the original IEEE and The Open Group Standard is the referee document. The original Standard can be obtained online at [http://www.opengroup.org/unix/online.html](http://www.opengroup.org/unix/online.html).
 
-Any typographical or formatting errors that appear in this page are most likely to have been introduced during the conversion of the source files to man page format. To report such errors, see [https://www.kernel.org/doc/man-pages/reporting
-
-_bugs.html](https://www.kernel.org/doc/man-pages/reporting_bugs.html).
+Any typographical or formatting errors that appear in this page are most likely to have been introduced during the conversion of the source files to man page format. To report such errors, see [this](https://www.kernel.org/doc/man-pages/reporting_bugs.html).
 
 Copyright 2017 IEEE/The Open Group
 
@@ -142,33 +140,55 @@ Use C++ standard library classes `std::string` and `std::wstring` for improved s
 ## Practical Example
 
 ```c
+
 #include <Windows.h>
 #include <strsafe.h>
+#include <stdio.h>
 
 int main() {
-    char src[50] = "Hello ";
-    char dest[20];
+    char src[50] = "Hello, ";
+    char dest[20] = "World!";
+    char final[100];
+    size_t destLength = 0;
+    HRESULT hr;
 
-    // Secure concatenation with size checks
-    HRESULT hr = StringCchCat(dest, ARRAYSIZE(dest), src);
-    if (SUCCEEDED(hr)) {
-        printf("Concatenated: %s\n", dest);
-    } else {
-        printf("Error: Potential buffer overflow.\n");
+    // Securely copy 'src' to 'final'
+    hr = StringCchCopy(final, ARRAYSIZE(final), src);
+    if (FAILED(hr)) {
+        printf("Copy Error: %X\n", hr);
+        return -1;
     }
 
+    // Securely concatenate 'dest' onto 'final'
+    hr = StringCchCat(final, ARRAYSIZE(final), dest);
+    if (FAILED(hr)) {
+        printf("Concatenate Error: %X\n", hr);
+        return -1;
+    }
+
+    // Securely get the length of 'final'
+    hr = StringCchLength(final, ARRAYSIZE(final), &destLength);
+    if (FAILED(hr)) {
+        printf("Length Error: %X\n", hr);
+        return -1;
+    }
+
+    printf("Result: %s\nLength: %zu\n", final, destLength);
+
     return 0;
-    \* > a.out
+}
+    /* > a.out
     * Result: Hello, World!
     * Length: 13
-    *\
+    */
 }
 ```
 
 ##  Additional Tips
 
-* **Header Files:** `<string.h>` for C functions, `<windows.h>` for Windows API.
+* **Header Files:** `<string.h>` for C functions, `<Windows.h>` for Windows API.
 * **Development Tools:** Utilize the latest Microsoft Visual Studio and Windows SDK.
 * **Data types:** Employ Windows data types like `SIZE_T`, `DWORD`.
 * **TCHAR Macros:**  `TCHAR` macros aid in ANSI/Unicode compatible code (*use carefully*).
-* **Documentation:**  Visit Microsoft Docs for comprehensive API references. [Read](https://learn.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp?view=msvc-170) 
+* **Documentation:**  Visit Microsoft Docs for comprehensive API references.
+    [Read Docs](https://learn.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp?view=msvc-170) 
