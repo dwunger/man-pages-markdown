@@ -1,7 +1,11 @@
+```markdown
 # string.h(0p) - Linux manual page
 
 ## PROLOG
-This manual page is part of the POSIX Programmer's Manual. The Linux implementation of this interface may differ (consult the corresponding Linux manual page for details of Linux behavior), or the interface may not be implemented on Linux.
+This manual page is part of the POSIX Programmer's Manual. The Linux
+implementation of this interface may differ (consult the corresponding Linux
+manual page for details of Linux behavior), or the interface may not be
+implemented on Linux.
 
 ## NAME
 string.h — string operations
@@ -12,13 +16,20 @@ string.h — string operations
 ```
 
 ## DESCRIPTION
-Some of the functionality described on this reference page extends the ISO C standard. Applications shall define the appropriate feature test macro (see the System Interfaces volume of POSIX.1‐2017, Section 2.2, The Compilation Environment) to enable the visibility of these symbols in this header.
+Some of the functionality described on this reference page extends the ISO C
+standard. Applications shall define the appropriate feature test macro (see the
+System Interfaces volume of POSIX.1‐2017, Section 2.2, The Compilation
+Environment) to enable the visibility of these symbols in this header.
 
-The `<string.h>` header shall define NULL and `size_t` as described in `<stddef.h>`.
+The `<string.h>` header shall define NULL and `size_t` as described in
+`<stddef.h>`.
 
-The `<string.h>` header shall define the `locale_t` type as described in `<locale.h>`.
+The `<string.h>` header shall define the `locale_t` type as described in
+`<locale.h>`.
 
-The following shall be declared as functions and may also be defined as macros. Function prototypes shall be provided for use with ISO C standard compilers.
+The following shall be declared as functions and may also be defined as macros.
+Function prototypes shall be provided for use with ISO C standard compilers.
+```
 
 |   Function     |      Parameter 1      |     Parameter 2      |      Parameter 3     |    Parameter 4    |
 |:--------------:|:---------------------:|:--------------------:|:--------------------:|:-----------------:|
@@ -137,11 +148,22 @@ Inclusion of the `<string.h>` header may also make visible all symbols from `<st
   - [strxfrm(3p)](https://man7.org/linux/man-pages/man3/strxfrm.3p.html)
 
 ## COPYRIGHT
-Portions of this text are reprinted and reproduced in electronic form from IEEE Std 1003.1-2017, Standard for Information Technology -- Portable Operating System Interface (POSIX), The Open Group Base Specifications Issue 7, 2018 Edition, Copyright (C) 2018 by the Institute of Electrical and Electronics Engineers, Inc and The Open Group. In the event of any discrepancy between this version and the original IEEE and The Open Group Standard, the original IEEE and The Open Group Standard is the referee document. The original Standard can be obtained online at [http://www.opengroup.org/unix/online.html](http://www.opengroup.org/unix/online.html).
+Portions of this text are reprinted and reproduced in electronic form from IEEE
+Std 1003.1-2017, Standard for Information Technology -- Portable Operating
+System Interface (POSIX), The Open Group Base Specifications Issue 7, 2018
+Edition, Copyright (C) 2018 by the Institute of Electrical and Electronics
+Engineers, Inc and The Open Group. In the event of any discrepancy between this
+version and the original IEEE and The Open Group Standard, the original IEEE and
+The Open Group Standard is the referee document. The original Standard can be
+obtained online at [OpenGroup](http://www.opengroup.org/unix/online.html).
 
-Any typographical or formatting errors that appear in this page are most likely to have been introduced during the conversion of the source files to man page format. To report such errors, see [this](https://www.kernel.org/doc/man-pages/reporting_bugs.html).
+Any typographical or formatting errors that appear in this page are most likely
+to have been introduced during the conversion of the source files to man page
+format. To report such errors, see:
+[this](https://www.kernel.org/doc/man-pages/reporting_bugs.html).
 
 Copyright 2017 IEEE/The Open Group
+
 
 ---
 
@@ -149,23 +171,29 @@ Copyright 2017 IEEE/The Open Group
 
 ## Key Considerations
 
-* **Unicode (UTF-16):** Design applications with internationalization in mind and embrace Unicode when using Windows APIs.
-* **Safety and Security:** Prioritize the use of secure string manipulation functions (those ending in `_s` like `strcpy_s`, `strcat_s`) to protect your code from buffer overflows and other vulnerabilities.
-* **Windows vs. POSIX:** Familiarize yourself with Windows-specific alternatives to POSIX-style string functions (see the table below).
-* **C++:** For safer and more streamlined string handling in C++ projects, leverage `std::string` or `std::wstring`.
+* **Unicode (UTF-16):** Design applications with internationalization in mind
+  and embrace Unicode when using Windows APIs.
+* **Safety and Security:** Prioritize the use of secure string manipulation
+  functions (those ending in `_s` like `strcpy_s`, `strcat_s`) to protect your
+  code from buffer overflows and other vulnerabilities.
+* **Windows vs. POSIX:** Familiarize yourself with Windows-specific alternatives
+  to POSIX-style string functions (see the table below).
+* **C++:** For safer and more streamlined string handling in C++ projects,
+  leverage `std::string` or `std::wstring`.
+
 
 ## String Manipulation Function Alternatives
 
-| POSIX-like Function | Windows Alternative(s)                      | Notes                                         |
-|---------------------|---------------------------------------------|-----------------------------------------------|
-| `memcpy`, `memmove` | `CopyMemory`, `RtlMoveMemory`               | For copying blocks of memory.                 |
-| `memset`            | `FillMemory`, `ZeroMemory`                  | Sets memory blocks.                           |
-| `strcat`, `strncat` | `StringCchCat`, `strcat_s`                  | Concatenates strings (use safe alternatives). |
-| `strcmp`, `strncmp` | `CompareString`, `lstrcmp`, `lstrcmpi`      | String comparison options.                    |
-| `strcpy`, `strncpy` | `StringCchCopy`, `strcpy_s`                 | Copies strings (use safe alternatives).       |
-| `strlen`            | `lstrlen`                                   | Gets string length.                           |
-| `strchr`, `strrchr` | `StrChr`, `StrRChr`                         | Finds specific characters in strings.         |
-| `strstr`            | `StrStr`                                    | Finds a substring within a string.            |
+| POSIX-like Function | Windows Alternative(s)                 | Notes                                         |
+|---------------------|----------------------------------------|-----------------------------------------------|
+| `memcpy`, `memmove` | `CopyMemory`, `RtlMoveMemory`          | For copying blocks of memory.                 |
+| `memset`            | `FillMemory`, `ZeroMemory`             | Sets memory blocks.                           |
+| `strcat`, `strncat` | `StringCchCat`, `strcat_s`             | Concatenates strings (use safe alternatives). |
+| `strcmp`, `strncmp` | `CompareString`, `lstrcmp`, `lstrcmpi` | String comparison options.                    |
+| `strcpy`, `strncpy` | `StringCchCopy`, `strcpy_s`            | Copies strings (use safe alternatives).       |
+| `strlen`            | `lstrlen`                              | Gets string length.                           |
+| `strchr`, `strrchr` | `StrChr`, `StrRChr`                    | Finds specific characters in strings.         |
+| `strstr`            | `StrStr`                               | Finds a substring within a string.            |
 
 ## Essential Windows API Functions
 
@@ -177,11 +205,14 @@ Copyright 2017 IEEE/The Open Group
 
 ## Security Awareness
 
-Always prioritize functions designed with security in mind. Safe functions often have an `_s` suffix and implement crucial buffer size checks.
+Always prioritize functions designed with security in mind. Safe functions often have an `_s` 
+suffix and implement crucial buffer size checks.
 
 ## C++ Considerations
 
-Use C++ standard library classes `std::string` and `std::wstring` for improved string management, reducing manual memory management risks.  They enhance code readability and maintainability.
+Use C++ standard library classes `std::string` and `std::wstring` for improved string 
+management, reducing manual memory management risks.  They enhance code readability 
+and maintainability.
 
 ## Practical Example
 
