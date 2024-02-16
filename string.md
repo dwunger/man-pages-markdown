@@ -19,42 +19,44 @@ The `<string.h>` header shall define NULL and `size_t` as described in `<stddef.
 The `<string.h>` header shall define the `locale_t` type as described in `<locale.h>`.
 
 The following shall be declared as functions and may also be defined as macros. Function prototypes shall be provided for use with ISO C standard compilers.
-```c
-void    *memccpy(void *restrict, const void *restrict, int, size_t);
-void    *memchr(const void *, int, size_t);
-int      memcmp(const void *, const void *, size_t);
-void    *memcpy(void *restrict, const void *restrict, size_t);
-void    *memmove(void *, const void *, size_t);
-void    *memset(void *, int, size_t);
-char    *stpcpy(char *restrict, const char *restrict);
-char    *stpncpy(char *restrict, const char *restrict, size_t);
-char    *strcat(char *restrict, const char *restrict);
-char    *strchr(const char *, int);
-int      strcmp(const char *, const char *);
-int      strcoll(const char *, const char *);
-int      strcoll_l(const char *, const char *, locale_t);
-char    *strcpy(char *restrict, const char *restrict);
-size_t   strcspn(const char *, const char *);
-char    *strdup(const char *);
-char    *strerror(int);
-char    *strerror_l(int, locale_t);
-int      strerror_r(int, char *, size_t);
-size_t   strlen(const char *);
-char    *strncat(char *restrict, const char *restrict, size_t);
-int      strncmp(const char *, const char *, size_t);
-char    *strncpy(char *restrict, const char *restrict, size_t);
-char    *strndup(const char *, size_t);
-size_t   strnlen(const char *, size_t);
-char    *strpbrk(const char *, const char *);
-char    *strrchr(const char *, int);
-char    *strsignal(int);
-size_t   strspn(const char *, const char *);
-char    *strstr(const char *, const char *);
-char    *strtok(char *restrict, const char *restrict);
-char    *strtok_r(char *restrict, const char *restrict, char **restrict);
-size_t   strxfrm(char *restrict, const char *restrict, size_t);
-size_t   strxfrm_l(char *restrict, const char *restrict, size_t, locale_t);
-```
+
+|   Function     |      Parameter 1      |     Parameter 2      |      Parameter 3     |    Parameter 4    |
+|:--------------:|:---------------------:|:--------------------:|:--------------------:|:-----------------:|
+| **memccpy**    | `void *dest`          | `const void *src`    | `int stop_char`      | `size_t num_bytes`|
+| **memchr**     | `const void *buf`     | `int search_char`    | `size_t num_bytes`   |                   |
+| **memcmp**     | `const void *buf1`    | `const void *buf2`   | `size_t num_bytes`   |                   |
+| **memcpy**     | `void *dest`          | `const void *src`    | `size_t num_bytes`   |                   |
+| **memmove**    | `void *dest`          | `const void *src`    | `size_t num_bytes`   |                   |
+| **memset**     | `void *buffer`        | `int value`          | `size_t num_bytes`   |                   |
+| **stpcpy**     | `char *dest`          | `const char *src`    |                      |                   |
+| **stpncpy**    | `char *dest`          | `const char *src`    | `size_t num_chars`   |                   |
+| **strcat**     | `char *dest`          | `const char *src`    |                      |                   |
+| **strchr**     | `const char *str`     | `int search_char`    |                      |                   |
+| **strcmp**     | `const char *str1`    | `const char *str2`   |                      |                   |
+| **strcoll**    | `const char *str1`    | `const char *str2`   |                      |                   |
+| **strcoll_l**  | `const char *str1`    | `const char *str2`   | `locale_t locale`    |                   |
+| **strcpy**     | `char *dest`          | `const char *src`    |                      |                   |
+| **strcspn**    | `const char *str`     | `const char *reject` |                      |                   |
+| **strdup**     | `const char *src`     |                      |                      |                   |
+| **strerror**   | `int errnum`          |                      |                      |                   |
+| **strerror_l** | `int errnum`          | `locale_t locale`    |                      |                   |
+| **strerror_r** | `int errnum`          | `char *buf`          | `size_t buflen`      |                   |
+| **strlen**     | `const char *str`     |                      |                      |                   |
+| **strncat**    | `char *dest`          | `const char *src`    | `size_t num_chars`   |                   |
+| **strncmp**    | `const char *str1`    | `const char *str2`   | `size_t num_chars`   |                   |
+| **strncpy**    | `char *dest`          | `const char *src`    | `size_t num_chars`   |                   |
+| **strndup**    | `const char *src`     | `size_t num_chars`   |                      |                   |
+| **strnlen**    | `const char *str`     | `size_t max_len`     |                      |                   |
+| **strpbrk**    | `const char *str`     | `const char *accept` |                      |                   |
+| **strrchr**    | `const char *str`     | `int search_char`    |                      |                   |
+| **strsignal**  | `int signal`          |                      |                      |                   |
+| **strspn**     | `const char *str`     | `const char *accept` |                      |                   |
+| **strstr**     | `const char *haystack`| `const char *needle` |                      |                   |
+| **strtok**     | `char *str`           | `const char *delims` |                      |                   |
+| **strtok_r**   | `char *str`           | `const char *delims` |                      | `char **saveptr`  |
+| **strxfrm**    | `char *dest`          | `const char *src`    | `size_t num_chars`   |                   |
+| **strxfrm_l**  | `char *dest`          | `const char *src`    | `size_t num_chars`   | `locale_t locale` |
+
 ---
 Windows Specific:
 ```c
