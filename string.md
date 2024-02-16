@@ -29,7 +29,7 @@ The `<string.h>` header shall define the `locale_t` type as described in
 
 The following shall be declared as functions and may also be defined as macros.
 Function prototypes shall be provided for use with ISO C standard compilers.
-```
+
 
 |   Function     |      Parameter 1      |     Parameter 2      |      Parameter 3     |    Parameter 4    |
 |:--------------:|:---------------------:|:--------------------:|:--------------------:|:-----------------:|
